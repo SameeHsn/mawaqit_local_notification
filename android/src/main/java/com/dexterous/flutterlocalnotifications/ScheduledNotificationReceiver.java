@@ -123,8 +123,9 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         Log.d("isBatteryOptimizationEnabled?:", "False");
         isBatteryOptimizationEnabled="False";
       }
-      Log.d("schedualFormatTime:",schedualFormatTime);
       Log.d("formattedDate:",formattedDate);
+      Log.d("schedualFormatTime:",schedualFormatTime);
+      
       //   String baseString=  "currentDateTime: " + formattedDate.toString() +" ,scheduledDateTime: " + schedualFormatTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
 
       // try {
