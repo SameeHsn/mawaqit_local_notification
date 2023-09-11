@@ -88,6 +88,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       Date date = new Date();
       SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
       String formattedDate = dateFormat.format(date);
+      String schedualFormatTime=dateFormat.format(notificationDetails.scheduledDateTime.toString());
 
 //      Log.d("notificationDetailsJson:",notificationDetailsJson.toString());
 //      Log.d("currentDateTime:",formattedDate.toString());
@@ -116,14 +117,16 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         Log.d("isBatteryOptimizationEnabled?:", "False");
         isBatteryOptimizationEnabled="False";
       }
-        String baseString=  "currentDateTime: " + formattedDate.toString() +" ,scheduledDateTime: " + notificationDetails.scheduledDateTime.toString() + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
+      Log.d("schedualFormatTime:",schedualFormatTime);
+      Log.d("formattedDate:",formattedDate);
+      //   String baseString=  "currentDateTime: " + formattedDate.toString() +" ,scheduledDateTime: " + schedualFormatTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
 
-      try {
-        Log.d("baseString:",baseString);
-        throw new Exception(baseString);
-      } catch (Exception e) {
-        Sentry.captureException(e);
-      }
+      // try {
+      //   Log.d("baseString:",baseString);
+      //   throw new Exception(baseString);
+      // } catch (Exception e) {
+      //   Sentry.captureException(e);
+      // }
     }
   }
   public boolean isPowerSavingModeOn(Context context) {
