@@ -89,11 +89,10 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       Date date = new Date();
       
       SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-      SimpleDateFormat dateFormatDash = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       
       String formattedDate = dateFormat.format(date);
       
-      String schedualFormatTime = dateFormat.format(dateFormatDash.parse(notificationDetails.scheduledDateTime.toString()));
+      String schedualFormatTime = dateFormat.format(notificationDetails.scheduledDateTime.toString());
       
 
 //      Log.d("notificationDetailsJson:",notificationDetailsJson.toString());
