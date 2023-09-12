@@ -43,7 +43,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
 
   @Override
   @SuppressWarnings("deprecation")
-  public void onReceive(final Context context, Intent intent) throws ParseException{
+  public void onReceive(final Context context, Intent intent) {
 
 
     String notificationDetailsJson =
@@ -95,8 +95,8 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       String schedualTime=notificationDetails.scheduledDateTime.toString();
       String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1];
 
-      Date cTime=dateTimeFormatSlash.parse(formattedCurrentDateTime);
-      Date sTime=dateTimeFormatSlash.parse(formatedSchedualDateTime);
+      Date cTime=dashDateTimeFormat.parse(formattedCurrentDateTime);
+      Date sTime=dashDateTimeFormat.parse(formatedSchedualDateTime);
       int result = cTime.compareTo(sTime);
       // if (result > 0) {
       //       System.out.println(formatedCurrentDateTime + " is after " + formatedSchedualDateTime);
