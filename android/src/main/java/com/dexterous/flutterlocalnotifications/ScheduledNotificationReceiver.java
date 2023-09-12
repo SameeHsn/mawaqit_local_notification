@@ -94,18 +94,18 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       String schedualTime=notificationDetails.scheduledDateTime.toString();
       String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1];
+      Date cTime = new Date();
+      Date sTime = new Date();
+      try{
+        cTime=dashDateTimeFormat.parse(formattedCurrentDateTime);
+        sTime=dashDateTimeFormat.parse(formatedSchedualDateTime);
+      }
+      catch (Exception e) {
+        Log.e("ParseException",e.toString());
+      }
 
-      Date cTime=dashDateTimeFormat.parse(formattedCurrentDateTime);
-      Date sTime=dashDateTimeFormat.parse(formatedSchedualDateTime);
       int result = cTime.compareTo(sTime);
-      // if (result > 0) {
-      //       System.out.println(formatedCurrentDateTime + " is after " + formatedSchedualDateTime);
-      //   }
-//      Log.d("notificationDetailsJson:",notificationDetailsJson.toString());
-//      Log.d("currentDateTime:",formattedDate.toString());
-//      Log.d("scheduledDateTime:",notificationDetails.scheduledDateTime.toString());
-//      Log.d("adhanTitle:",notificationDetails.title.toString());
-//      Log.d("adhanTitle:",notificationDetails.styleInformation("title").toString());
+      
       if (isPowerSavingModeOn(context)) {
         Log.d("isPowerSavingModeOn?:", "True");
         isPowerSavingModeOn="True";
@@ -131,13 +131,16 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       
         String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
+       if (result > 0) {
+         Log.d("---------------result:",formattedCurrentDateTime + " is after " + formatedSchedualDateTime);
+         try {
+           Log.d("baseString:",baseString);
+           throw new Exception(baseString);
+         } catch (Exception e) {
+           Sentry.captureException(e);
+         }
+       }
 
-      // try {
-        Log.d("baseString:",baseString);
-      //   throw new Exception(baseString);
-      // } catch (Exception e) {
-      //   Sentry.captureException(e);
-      // }
     }
   }
   public boolean isPowerSavingModeOn(Context context) {
