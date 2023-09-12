@@ -91,7 +91,8 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
       
       String formattedDate = dateFormat.format(date);
-      
+      Strig schedualTime=notificationDetails.scheduledDateTime.toString();
+      String schedualFormatDate=schedualTime.split("T")[0].split("-")[2]+"/"+schedualTime.split("T")[0].split("-")[1]+"/"+schedualTime.split("T")[0].split("-")[0]+" "+ schedualTime.split("T")[1];
 
 //      Log.d("notificationDetailsJson:",notificationDetailsJson.toString());
 //      Log.d("currentDateTime:",formattedDate.toString());
@@ -120,13 +121,12 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         Log.d("isBatteryOptimizationEnabled?:", "False");
         isBatteryOptimizationEnabled="False";
       }
-      Log.d("formattedDate:",formattedDate);
-      Log.d("schedualFormatTime:",notificationDetails.scheduledDateTime.toString());
       
-      //   String baseString=  "currentDateTime: " + formattedDate.toString() +" ,scheduledDateTime: " + schedualFormatTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
+      
+        String baseString=  "currentDateTime: " + formattedDate.toString() +" ,scheduledDateTime: " + schedualFormatDate + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
 
       // try {
-      //   Log.d("baseString:",baseString);
+        Log.d("baseString:",baseString);
       //   throw new Exception(baseString);
       // } catch (Exception e) {
       //   Sentry.captureException(e);
