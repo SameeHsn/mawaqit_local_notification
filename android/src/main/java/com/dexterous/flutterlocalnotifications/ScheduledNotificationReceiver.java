@@ -92,8 +92,6 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       
       String formattedDate = dateFormat.format(date);
       
-      String schedualFormatTime = dateFormat.format(notificationDetails.scheduledDateTime.toString());
-      
 
 //      Log.d("notificationDetailsJson:",notificationDetailsJson.toString());
 //      Log.d("currentDateTime:",formattedDate.toString());
@@ -123,7 +121,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
         isBatteryOptimizationEnabled="False";
       }
       Log.d("formattedDate:",formattedDate);
-      Log.d("schedualFormatTime:",schedualFormatTime);
+      Log.d("schedualFormatTime:",notificationDetails.scheduledDateTime.toString());
       
       //   String baseString=  "currentDateTime: " + formattedDate.toString() +" ,scheduledDateTime: " + schedualFormatTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
 
