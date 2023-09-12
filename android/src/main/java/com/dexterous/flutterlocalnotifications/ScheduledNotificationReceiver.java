@@ -24,7 +24,8 @@ import io.sentry.android.core.SentryAndroid;
 import android.app.Application;
 import io.sentry.Sentry;
 
-
+import java.text.ParseException;
+import java.text.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import android.app.NotificationManager;
@@ -42,7 +43,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
 
   @Override
   @SuppressWarnings("deprecation")
-  public void onReceive(final Context context, Intent intent) {
+  public void onReceive(final Context context, Intent intent) throws ParseException{
 
 
     String notificationDetailsJson =
@@ -87,13 +88,19 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       String isBatteryOptimizationEnabled="";
       
       Date date = new Date();
+      SimpleDateFormat dashDateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       
-      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+      String formattedCurrentDateTime = dashDateTimeFormat.format(date);
       
-      String formattedDate = dateFormat.format(date);
       String schedualTime=notificationDetails.scheduledDateTime.toString();
-      String schedualFormatDate=schedualTime.split("T")[0].split("-")[2]+"/"+schedualTime.split("T")[0].split("-")[1]+"/"+schedualTime.split("T")[0].split("-")[0]+" "+ schedualTime.split("T")[1];
+      String formatedSchedualDateTime=schedualTime.split("T")[0]+" "+ schedualTime.split("T")[1];
 
+      Date cTime=dateTimeFormatSlash.parse(formattedCurrentDateTime);
+      Date sTime=dateTimeFormatSlash.parse(formatedSchedualDateTime);
+      int result = cTime.compareTo(sTime);
+      // if (result > 0) {
+      //       System.out.println(formatedCurrentDateTime + " is after " + formatedSchedualDateTime);
+      //   }
 //      Log.d("notificationDetailsJson:",notificationDetailsJson.toString());
 //      Log.d("currentDateTime:",formattedDate.toString());
 //      Log.d("scheduledDateTime:",notificationDetails.scheduledDateTime.toString());
@@ -123,7 +130,7 @@ public class ScheduledNotificationReceiver extends BroadcastReceiver {
       }
       
       
-        String baseString=  "currentDateTime: " + formattedDate.toString() +" ,scheduledDateTime: " + schedualFormatDate + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
+        String baseString=  "currentDateTime: " + formattedCurrentDateTime.toString() +" ,scheduledDateTime: " + formatedSchedualDateTime + " ,isPowerSavingModeOn: " +isPowerSavingModeOn.toString() + " ,isDoNotDisturbOn: " +isDoNotDisturbOn.toString() +" ,isBatteryOptimizationEnabled: " + isBatteryOptimizationEnabled.toString() +" ,noitification_title: " + notificationDetails.title.toString();
 
       // try {
         Log.d("baseString:",baseString);
